@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - html forms</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign Up Form</title>
+        <link rel="stylesheet" href="https://codepen.io/gymratpacks/pen/VKzBEp#0">
+        <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+      <div class="row">
+    <div class="col-md-12">
+      <form action="{{url_for('index')}}" method="POST">
+        <h1> Flask URL Shortener </h1>
+        {% with messages = get_flashed_messages() %}
+					{% if messages %}
+					  <ul>
+					  {% for message in messages %}
+					   <li style="color: red;">
+							  <strong>{{ message }}</strong>
+						  </li>
+					  {% endfor %}
+					  </ul>
+					{% endif %}
+              {% endwith %}
+        <fieldset>
+          
+          <legend><span class="number">1</span> Input your URL</legend>
+        
+          <label for="name">LONG URL:</label>
+          <input type="text" id="name" name="long_url" placeholder="Please enter a long url!">
+        
+          <label for="name">SHORTENED URL:</label>
+          <input type="text" name="short_url" value="{{short_url}}" id="myInput" readonly>
+            {%if short_url:%}
+             <button type="submit" onclick="myFunction()">COPY URL</button>
+            {% endif %}
+            <button type="submit">GENERATE URL</button>
+        </fieldset>
+      </form>
+    </body>
+</html>
+<!-- partial -->
+</body>
+<script>
+    function myFunction() {
+  // Get the text field
+  var copyText = document.getElementById("myInput");
+
+  // Select the text field
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+   // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value);
+
+  // Alert the copied text
+  alert("Copied the text: " + copyText.value);
+}
+</script>
+</html>
